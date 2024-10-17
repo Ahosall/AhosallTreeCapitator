@@ -8,7 +8,7 @@ public class Main extends JavaPlugin {
         getLogger().info("Está pronto para ser utilizado!");
 
         // Register plugin events
-        getServer().getPluginManager().registerEvents(new EventsListener(), this);
+        getServer().getPluginManager().registerEvents(new EventsListener(this), this);
     }
 
     @Override

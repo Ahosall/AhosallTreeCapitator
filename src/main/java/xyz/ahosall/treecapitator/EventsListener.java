@@ -7,10 +7,17 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import xyz.ahosall.treecapitator.modules.TreeCapitator;
 
 public class EventsListener implements Listener {
+
+  private JavaPlugin plugin;
+
+  public EventsListener(JavaPlugin plugin) {
+    this.plugin = plugin;
+  }
 
   @EventHandler
   public void onBreakBlock(BlockBreakEvent event) {
@@ -29,7 +36,7 @@ public class EventsListener implements Listener {
 
     boolean allRight = isTree && holdingAxe && itsNotSneaking && isSurvivalMode;
     if (allRight) {
-      TreeCapitator treeCapitator = new TreeCapitator();
+      TreeCapitator treeCapitator = new TreeCapitator(plugin);
 
       treeCapitator.process(player, block, holdingItem);
     }

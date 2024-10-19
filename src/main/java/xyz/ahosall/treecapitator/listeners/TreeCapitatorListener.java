@@ -66,7 +66,6 @@ public class TreeCapitatorListener implements Listener {
 
     for (Block adjacentBlock : adjacentBlocks) {
       int toolDurability = getDurability(tool);
-      player.sendMessage("Durabilidade do item: " + tool.getType().toString() + " é de " + toolDurability);
 
       if (isWood(adjacentBlock.getType())) {
         if (toolDurability == 0) {

@@ -7,7 +7,7 @@ import xyz.ahosall.treecapitator.listeners.TreeCapitatorListener;
 public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
-        getLogger().info("Está pronto para ser utilizado!");
+        getLogger().info("Activated successfully!");
 
         // Register plugin events
         getServer()
@@ -17,6 +17,6 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().info("Desativado com sucesso...");
+        getLogger().info("Successfully deactivated...");
     }
 }

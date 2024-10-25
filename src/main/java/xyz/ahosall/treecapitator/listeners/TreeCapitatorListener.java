@@ -65,8 +65,16 @@ public class TreeCapitatorListener implements Listener {
     };
 
     for (Block adjacentBlock : adjacentBlocks) {
+      int toolDurability = getDurability(tool);
+
       if (isWood(adjacentBlock.getType())) {
-        adjacentBlock.getWorld().playSound(player.getLocation(), Sound.BLOCK_WOOD_BREAK, 40, 1);
+        if (toolDurability == 0) {
+          player.getInventory().setItemInMainHand(null);
+          adjacentBlock.getWorld().playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0f, 1.0f);
+          break;
+        }
+
+        adjacentBlock.getWorld().playSound(player.getLocation(), Sound.BLOCK_WOOD_BREAK, 1.0f, 1.0f);
         adjacentBlock.getWorld().dropItemNaturally(adjacentBlock.getLocation(), new ItemStack(adjacentBlock.getType()));
         adjacentBlock.setType(Material.AIR);
 
@@ -78,6 +86,18 @@ public class TreeCapitatorListener implements Listener {
 
   private boolean isWood(Material material) {
     return material.toString().endsWith("_LOG") || material.toString().endsWith("_STEM");
+  }
+
+  private Integer getDurability(ItemStack tool) {
+    if (tool != null && tool.getItemMeta() instanceof Damageable) {
+      Damageable damageable = (Damageable) tool.getItemMeta();
+      int damage = damageable.getDamage();
+      int durability = tool.getType().getMaxDurability() - damage;
+
+      return durability;
+    }
+
+    return null;
   }
 
   private void updateDurability(ItemStack tool) {

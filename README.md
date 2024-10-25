@@ -6,6 +6,7 @@ AhosallTreeCapitator is a simple and efficient plugin that automates the process
 
 - Compatible with all types of Minecraft axes and trees.
 - Players who only want to mine one block can use sneaking mode to disable the capping of entire trees.
+- Trees are replanted after cutting them above the first block of the tree, if you cut them on the first block the saplings will not be replanted.
 
 ## Compatibility
 

@@ -76,7 +76,14 @@ public class TreeCapitatorListener implements Listener {
 
         adjacentBlock.getWorld().playSound(player.getLocation(), Sound.BLOCK_WOOD_BREAK, 1.0f, 1.0f);
         adjacentBlock.getWorld().dropItemNaturally(adjacentBlock.getLocation(), new ItemStack(adjacentBlock.getType()));
-        adjacentBlock.setType(Material.AIR);
+
+        Material blockMaterial = Material.AIR;
+        Boolean isDirt = adjacentBlock.getRelative(0, -1, 0).getType().equals(Material.DIRT);
+
+        if (isDirt)
+          blockMaterial = Material.getMaterial(adjacentBlock.getType().toString().replace("_LOG", "_SAPLING"));
+
+        adjacentBlock.setType(blockMaterial);
 
         updateDurability(tool);
         processConnectedWood(adjacentBlock, player, tool, processedBlocks);
